@@ -45,19 +45,19 @@ void Robot::set_power(double new_power)
 {
     /*
      * Sets a simulated motor controller power. Range of [-1, 1] is enforced.
-     *
-     * Uses cstdlib, iostream
      */
 
-    if (power >= -1.0 && power <= 1.0)
+    if (new_power <= -1.0)
     {
-        power = new_power;
+        power = -1.0;
+    }
+    else if (new_power >= 1.0)
+    {
+        power = 1.0;
     }
     else
     {
-        std::cerr << "Power must be between -1.0 and 1.0. Exiting program."
-                  << std::endl;
-        std::exit(EXIT_FAILURE);
+        power = new_power;
     }
 }
 

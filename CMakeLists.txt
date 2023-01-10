@@ -3,11 +3,13 @@ cmake_minimum_required(VERSION 3.12)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED on)
 
-project(robopiddemo VERSION 0.1.0)
+project(robopiddemo VERSION 0.2.0)
 
 add_library(${PROJECT_NAME} STATIC
     include/robot.h
+    include/pidcontroller.h
     src/robot.cpp
+    src/pidcontroller.cpp
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -20,6 +22,7 @@ target_include_directories(${PROJECT_NAME}
 
 set(public_headers
     include/robot.h
+    include/pidcontroller.h
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${public_headers}")
 

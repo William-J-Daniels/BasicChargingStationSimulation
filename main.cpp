@@ -1,5 +1,6 @@
 #include <iostream>
 #include <robot.h>
+#include <pidcontroller.h>
 
 int main() {
     /*
@@ -18,10 +19,20 @@ int main() {
         0.5,  // is 0.5 meters long,
         4     // and has 3 wheels
     );
-    MyBot.set_power(0.02); // set the power 0.02
+
+    will::PIDController MyController = will::PIDController ( // make a PID with
+        0.175,        // product weight
+        0.025,        // integral weight
+        0.9,        // derivative weight
+        TIME_STEP // and a period equal to the simulation time step (it must be)
+    );
 
     while (current_time <= SIM_LENGTH) //until we simulate SIM_LENGTH seconds...
     {
+        // have the PID controller set a power for the robot
+        MyBot.set_power(MyController.calculate(MyBot.get_angle()));
+
+        // update the simulation of the robot
         MyBot.advance_time(TIME_STEP);
         MyBot.save_frame(current_time);
 
