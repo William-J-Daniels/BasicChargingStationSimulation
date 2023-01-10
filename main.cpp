@@ -15,9 +15,9 @@ int main() {
     const double SIM_LENGTH = 10.0; // seconds
 
     will::Robot MyBot = will::Robot( // make a robot that...
-        45.0, // weights 45.0 kg,
+        45, // weights 45.0 kg,
         0.5,  // is 0.5 meters long,
-        4     // and has 3 wheels
+        3     // and has 3 wheels
     );
 
     will::PIDController MyController = will::PIDController ( // make a PID with

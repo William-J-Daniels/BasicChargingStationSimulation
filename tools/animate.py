@@ -86,6 +86,6 @@ anim = FuncAnimation(fig, frame_animation, init_func=frame_init,
                      frames=1000, interval = 10, blit = True)
 
 # comment out to avoid seeing the animation in real time
-plt.show()
+#plt.show()
 # uncomment to save the sanimation
-#anim.save((sys.argv[1])[:-3] + "mp4")
+anim.save((sys.argv[1])[:-3] + "mp4")

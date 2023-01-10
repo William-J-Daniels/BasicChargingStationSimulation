@@ -167,22 +167,21 @@ void Robot::update_tourque()
      * Uses cmath
      */
 
-    // There will be a contribution to the tourque from each wheel. We start
-    // with the contribution from the leftmost wheel because it does not fit
-    // into the for loop we will write next
-    tourque = charging_station_length/2 - position;
+    tourque = 0.0; // first reset the tourque
 
-    // now we do the rest of the wheels, starting fromt the second leftmost
-    for (int i = num_wheels; i > 0; i--)
-    { // for each other wheel...
-        tourque = tourque + (charging_station_length/2 - position - length/i);
-        // add the contribution from that wheel
+    for (int i = 0; i < num_wheels; i++)
+    { // for each wheel starting from the left...
+        tourque = tourque + ( // add the tourque due to that wheel
+            charging_station_length/2.0 - (position + i*length/(num_wheels-1))
+        );
     }
 
     // as a last step, we must multiply tourque by the force that a wheel
     // exerts on the charging station. This isn't dont until now so that we only
     // have to multiply once instead of num_wheels times, making the code faster
     tourque = tourque * (mass * 9.81 * std::cos(angle) / num_wheels);
+
+    std::cout << tourque << std::endl;
 }
 
 void Robot::update_acceleration() {
