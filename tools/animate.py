@@ -21,7 +21,7 @@ ax1.set_ylim(0.0,  2.2)
 ax1.set_title(sys.argv[1])
 
 ax2.set_xlim(min(data["time"]), max(data["time"]))
-ax2.set_ylim(min(data["angle"]), max(data["angle"]))
+ax2.set_ylim(1.1*min(data["angle"]), 1.1*max(data["angle"]))
 ax2.set_xlabel("Time [s]")
 ax2.set_ylabel("Angle [rad]")
 
