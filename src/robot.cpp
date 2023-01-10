@@ -180,8 +180,6 @@ void Robot::update_tourque()
     // exerts on the charging station. This isn't dont until now so that we only
     // have to multiply once instead of num_wheels times, making the code faster
     tourque = tourque * (mass * 9.81 * std::cos(angle) / num_wheels);
-
-    std::cout << tourque << std::endl;
 }
 
 void Robot::update_acceleration() {

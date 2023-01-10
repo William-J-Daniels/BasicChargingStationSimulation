@@ -15,15 +15,15 @@ int main() {
     const double SIM_LENGTH = 10.0; // seconds
 
     will::Robot MyBot = will::Robot( // make a robot that...
-        45, // weights 45.0 kg,
+        45.0, // weights 45.0 kg,
         0.5,  // is 0.5 meters long,
         3     // and has 3 wheels
     );
 
     will::PIDController MyController = will::PIDController ( // make a PID with
-        1.0,      // product weight
-        1.0,      // integral weight
-        1.0,      // derivative weight
+        1.0,      // product weight 1.0,
+        1.0,      // integral weight 1.0,
+        1.0,      // derivative weight 1.0,
         TIME_STEP // and a period equal to the simulation time step (it must be)
     );
 
