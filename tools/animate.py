@@ -21,7 +21,7 @@ ax1.set_ylim(0.0,  2.2)
 ax1.set_title(sys.argv[1])
 
 ax2.set_xlim(min(data["time"]), max(data["time"]))
-ax2.set_ylim(1.1*min(data["angle"]), 1.1*max(data["angle"]))
+ax2.set_ylim(-1.1*max(data["angle"]), 1.1*max(data["angle"]))
 ax2.set_xlabel("Time [s]")
 ax2.set_ylabel("Angle [rad]")
 
@@ -83,7 +83,7 @@ def frame_animation(i):
 
 # animation object
 anim = FuncAnimation(fig, frame_animation, init_func=frame_init,
-                     frames=1000, interval = 10, blit = True)
+                     frames=len(data.index)-1, interval = 10, blit = True)
 
 # comment out to avoid seeing the animation in real time
 plt.show()

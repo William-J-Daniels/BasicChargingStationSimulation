@@ -28,6 +28,14 @@ double PIDController::calculate(double new_measurement)
     last_error = error; // before updating the error, update the last error
     error = new_measurement - setpoint; // update the error
     cumulative_error = cumulative_error + error * period; // simple reimann sum
+    if (cumulative_error > max_integral)
+    {
+        cumulative_error = max_integral;
+    }
+    if (cumulative_error < min_integral)
+    {
+        cumulative_error = min_integral;
+    }
 
     return(
         product_gain * ( // proportional term

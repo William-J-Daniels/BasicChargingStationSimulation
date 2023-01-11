@@ -12,25 +12,33 @@ int main() {
     int current_frame       = 0;    // used to reduce floating point error
     double current_time     = 0.0;  // seconds
     const double TIME_STEP  = 0.01; // seconds
-    const double SIM_LENGTH = 10.0; // seconds
+    const double SIM_LENGTH = 60.0; // seconds
 
     will::Robot MyBot = will::Robot( // make a robot that...
         45.0, // weights 45.0 kg,
         0.5,  // is 0.5 meters long,
-        3     // and has 3 wheels
+        9     // and has 3 wheels
     );
+    MyBot.set_max_acceleration(15.0);
 
     will::PIDController MyController = will::PIDController ( // make a PID with
-        1.0,      // product weight 1.0,
-        1.0,      // integral weight 1.0,
-        1.0,      // derivative weight 1.0,
+        0.05,      // product weight 1.0,
+        0.005,      // integral weight 1.0,
+        0.125,    // derivative weight 1.0,
         TIME_STEP // and a period equal to the simulation time step (it must be)
     );
+    MyController.set_integral_limits(0.25, -0.25);
 
     while (current_time <= SIM_LENGTH) //until we simulate SIM_LENGTH seconds...
     {
         // have the PID controller set a power for the robot
         MyBot.set_power(MyController.calculate(MyBot.get_angle()));
+
+        // clear the historical variables of MyController every second
+        if (current_frame % 100 == 0)
+        {
+            MyController.reset();
+        }
 
         // update the simulation of the robot
         MyBot.advance_time(TIME_STEP);
